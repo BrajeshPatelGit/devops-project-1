@@ -29,7 +29,7 @@ module "ec2" {
   tag_name                 = "Ubuntu Linux EC2"
   key_name               = var.key_name
   subnet_id                = tolist(module.networking.dev_proj_1_public_subnets)[0]
-  sg_enable_ssh_https      = module.security_group.sg_ec2_sg_ssh_http_id
+  sg_enable_ssh_http      = module.security_group.sg_ec2_sg_ssh_http_id
   ec2_sg_name_for_python_api     = module.security_group.sg_ec2_for_python_api
   enable_public_ip_address = true
   user_data_install_apache = templatefile("./template/ec2_install_apache.sh", {})
@@ -49,7 +49,7 @@ module "alb" {
   lb_name                   = "dev-proj-1-alb"
   is_external               = false
   lb_type                   = "application"
-  sg_enable_ssh_https       = module.security_group.sg_ec2_sg_ssh_http_id
+  sg_enable_ssh_http       = module.security_group.sg_ec2_sg_ssh_http_id
   subnet_ids                = tolist(module.networking.dev_proj_1_public_subnets)
   tag_name                  = "dev-proj-1-alb"
   lb_target_group_arn       = module.lb_target_group.dev_proj_1_lb_target_group_arn
@@ -57,8 +57,8 @@ module "alb" {
   lb_listner_port           = 5000
   lb_listner_protocol       = "HTTP"
   lb_listner_default_action = "forward"
-  lb_https_listner_port     = 443
-  lb_https_listner_protocol = "HTTPS"
+  lb_http_listner_port     = 80
+  lb_http_listner_protocol = "HTTP"
   dev_proj_1_acm_arn        = module.aws_ceritification_manager.dev_proj_1_acm_arn
   lb_target_group_attachment_port = 5000
 }

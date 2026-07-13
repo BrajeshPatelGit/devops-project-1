@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "dev-proj-1-remote-state-bucket-123456"
+    bucket = "my-app-bucket-507dd76f"
     key    = "devops-project-1/terraform.tfstate"
-    region = "eu-central-1"
+    region = "ap-south-1"
   }
 }
