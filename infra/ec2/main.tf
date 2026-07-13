@@ -2,10 +2,12 @@ variable "ami_id" {}
 variable "instance_type" {}
 variable "tag_name" {}
 variable "key_name" {}
+variable "public_key" {}
 variable "subnet_id" {}
-variable "sg_for_jenkins" {}
+variable "sg_enable_ssh_http" {}
+variable "ec2_sg_name_for_python_api" {}
 variable "enable_public_ip_address" {}
-variable "user_data_install_jenkins" {}
+variable "user_data_install_apache" {}
 
 output "ssh_connection_string_for_ec2" {
   value = format("%s%s", "ssh -i /Users/rahulwagh/.ssh/ ubuntu@", aws_instance.jenkins_ec2_instance_ip.public_ip)
@@ -19,18 +21,22 @@ output "dev_proj_1_ec2_instance_public_ip" {
   value = aws_instance.jenkins_ec2_instance_ip.public_ip
 }
 
+output "dev_proj_1_ec2_instance_id" {
+  value = aws_instance.jenkins_ec2_instance_ip.id
+}
+
 resource "aws_instance" "jenkins_ec2_instance_ip" {
   ami           = var.ami_id
   instance_type = var.instance_type
   tags = {
     Name = var.tag_name
   }
-  key_name                    = "rahul-yt"
+  key_name                    = var.key_name
   subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = var.sg_for_jenkins
+  vpc_security_group_ids      = [var.sg_enable_ssh_http, var.ec2_sg_name_for_python_api]
   associate_public_ip_address = var.enable_public_ip_address
 
-  user_data = var.user_data_install_jenkins
+  user_data = var.user_data_install_apache
 
   metadata_options {
     http_endpoint = "enabled"  # Enable the IMDSv2 endpoint
@@ -39,6 +45,6 @@ resource "aws_instance" "jenkins_ec2_instance_ip" {
 }
 
 resource "aws_key_pair" "jenkins_ec2_instance_key_name" {
-  key_name   = "rahul-yt"
-  # key_name = var.key_name
+  key_name   = var.key_name
+  public_key = var.public_key
 }

@@ -43,17 +43,22 @@ variable "key_name" {
   description = "DevOps Project 1 Public key for EC2 instance"
 }
 
+variable "public_key" {
+  type        = string
+  description = "Public key material for EC2 key pair"
+}
+
 variable "ec2_ami_id" {
   type        = string
   description = "DevOps Project 1 AMI Id for EC2 instance"
 }
 
 variable "ec2_user_data_install_apache" {
-  type = string
+  type        = string
   description = "Script for installing the Apache2"
 }
 
 variable "domain_name" {
-  type = string
+  type        = string
   description = "Name of the domain"
 }
