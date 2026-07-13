@@ -1,8 +1,8 @@
 variable "ami_id" {}
 variable "instance_type" {}
 variable "tag_name" {}
-variable "key_name" {}
-variable "public_key" {}
+# variable "key_name" {}
+# variable "public_key" {}
 variable "subnet_id" {}
 variable "sg_enable_ssh_http" {}
 variable "ec2_sg_name_for_python_api" {}
@@ -31,9 +31,10 @@ resource "aws_instance" "jenkins_ec2_instance_ip" {
   tags = {
     Name = var.tag_name
   }
-  key_name                    = var.key_name
+  key_name                    = "rahul-yt"
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [var.sg_enable_ssh_http, var.ec2_sg_name_for_python_api]
+
   associate_public_ip_address = var.enable_public_ip_address
 
   user_data = var.user_data_install_apache
@@ -45,6 +46,6 @@ resource "aws_instance" "jenkins_ec2_instance_ip" {
 }
 
 resource "aws_key_pair" "jenkins_ec2_instance_key_name" {
-  key_name   = var.key_name
-  public_key = var.public_key
+  key_name   = "rahul-yt"
+  # public_key = var.public_key
 }

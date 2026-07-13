@@ -38,15 +38,15 @@ variable "eu_availability_zone" {
   description = "Availability Zones"
 }
 
-variable "key_name" {
-  type        = string
-  description = "DevOps Project 1 Public key for EC2 instance"
-}
+# variable "key_name" {
+#   type        = string
+#   description = "DevOps Project 1 Public key for EC2 instance"
+# }
 
-variable "public_key" {
-  type        = string
-  description = "Public key material for EC2 key pair"
-}
+# variable "public_key" {
+#   type        = string
+#   description = "Public key material for EC2 key pair"
+# }
 
 variable "ec2_ami_id" {
   type        = string
@@ -58,7 +58,7 @@ variable "ec2_user_data_install_apache" {
   description = "Script for installing the Apache2"
 }
 
-variable "domain_name" {
-  type        = string
-  description = "Name of the domain"
-}
+# variable "domain_name" {
+#   type        = string
+#   description = "Name of the domain"
+# }
