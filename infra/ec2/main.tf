@@ -44,8 +44,3 @@ resource "aws_instance" "jenkins_ec2_instance_ip" {
     http_tokens   = "required" # Require the use of IMDSv2 tokens
   }
 }
-
-resource "aws_key_pair" "jenkins_ec2_instance_key_name" {
-  key_name   = "rahul-yt"
-  # public_key = var.public_key
-}
